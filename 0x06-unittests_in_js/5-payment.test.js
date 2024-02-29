@@ -21,7 +21,7 @@ describe('sendPaymentRequestToApi', () => {
 
   it('sendPaymentRequestToApi(10, 10) logs "The total is: 20" to the console', () => {
     sendPaymentRequestToApi(10, 10);
-    expect(bigBrother.log.calledWith('The total is: 20')).to.be.true;
-    expect(bigBrother.log.calledOnce).to.be.true;
+    expect(sinonSpy.log.calledWith('The total is: 20')).to.be.true;
+    expect(sinonSpy.log.calledOnce).to.be.true;
   });
 });
