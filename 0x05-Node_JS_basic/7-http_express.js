@@ -58,30 +58,30 @@ const countStudents = (dataPath) => new Promise((resolve, reject) => {
   }
 });
 
-app.get('/students', (_, resp) => {
+app.get('/', (_, res) => {
+  res.send('Hello Holberton School!');
+});
+
+app.get('/students', (_, res) => {
   const responseParts = ['This is the list of our students'];
 
   countStudents(DB_FILE)
     .then((report) => {
       responseParts.push(report);
       const responseText = responseParts.join('\n');
-      resp.setHeader('Content-Type', 'text/plain');
-      resp.setHeader('Content-Length', responseText.length);
-      resp.statusCode = 200;
-      resp.write(Buffer.from(responseText));
+      res.setHeader('Content-Type', 'text/plain');
+      res.setHeader('Content-Length', responseText.length);
+      res.statusCode = 200;
+      res.write(Buffer.from(responseText));
     })
     .catch((err) => {
       responseParts.push(err instanceof Error ? err.message : err.toString());
       const responseText = responseParts.join('\n');
-      resp.setHeader('Content-Type', 'text/plain');
-      resp.setHeader('Content-Length', responseText.length);
-      resp.statusCode = 200;
-      resp.write(Buffer.from(responseText));
+      res.setHeader('Content-Type', 'text/plain');
+      res.setHeader('Content-Length', responseText.length);
+      res.statusCode = 200;
+      res.write(Buffer.from(responseText));
     });
-});
-
-app.get('/', (_, resp) => {
-  resp.send('Hello Holberton School!');
 });
 
 app.listen(PORT, () => {
